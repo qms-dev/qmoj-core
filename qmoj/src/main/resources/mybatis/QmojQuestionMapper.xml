@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.akina.qmoj.mapper.QmojQuestionMapper">
+  <resultMap id="BaseResultMap" type="team.akina.qmoj.entity.QmojQuestion">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="difficulty" jdbcType="TINYINT" property="difficulty" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="platform" jdbcType="TINYINT" property="platform" />
+    <result column="question_slug" jdbcType="VARCHAR" property="questionSlug" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="team.akina.qmoj.entity.QmojQuestionWithBLOBs">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="lang_to_valid_playground" jdbcType="LONGVARCHAR" property="langToValidPlayground" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, question_id, title, difficulty, create_time, modify_time, platform, question_slug
+  </sql>
+  <sql id="Blob_Column_List">
+    content, lang_to_valid_playground
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from qmoj_question
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from qmoj_question
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="team.akina.qmoj.entity.QmojQuestionWithBLOBs">
+    insert into qmoj_question (id, question_id, title, 
+      difficulty, create_time, modify_time, 
+      platform, question_slug, content, 
+      lang_to_valid_playground)
+    values (#{id,jdbcType=BIGINT}, #{questionId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{difficulty,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{platform,jdbcType=TINYINT}, #{questionSlug,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, 
+      #{langToValidPlayground,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="team.akina.qmoj.entity.QmojQuestionWithBLOBs">
+    insert into qmoj_question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="difficulty != null">
+        difficulty,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="platform != null">
+        platform,
+      </if>
+      <if test="questionSlug != null">
+        question_slug,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="langToValidPlayground != null">
+        lang_to_valid_playground,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null">
+        #{difficulty,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=TINYINT},
+      </if>
+      <if test="questionSlug != null">
+        #{questionSlug,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="langToValidPlayground != null">
+        #{langToValidPlayground,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.akina.qmoj.entity.QmojQuestionWithBLOBs">
+    update qmoj_question
+    <set>
+      <if test="questionId != null">
+        question_id = #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null">
+        difficulty = #{difficulty,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="platform != null">
+        platform = #{platform,jdbcType=TINYINT},
+      </if>
+      <if test="questionSlug != null">
+        question_slug = #{questionSlug,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="langToValidPlayground != null">
+        lang_to_valid_playground = #{langToValidPlayground,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="team.akina.qmoj.entity.QmojQuestionWithBLOBs">
+    update qmoj_question
+    set question_id = #{questionId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      difficulty = #{difficulty,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      platform = #{platform,jdbcType=TINYINT},
+      question_slug = #{questionSlug,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      lang_to_valid_playground = #{langToValidPlayground,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.akina.qmoj.entity.QmojQuestion">
+    update qmoj_question
+    set question_id = #{questionId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      difficulty = #{difficulty,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      platform = #{platform,jdbcType=TINYINT},
+      question_slug = #{questionSlug,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
