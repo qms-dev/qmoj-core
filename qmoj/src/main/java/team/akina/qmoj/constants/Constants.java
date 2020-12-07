@@ -17,7 +17,10 @@ public class Constants {
             "{title    content    translatedTitle    translatedContent    topicTags {name      slug      translatedName}}}\"}";
 
     // 获取LeetCode题目内容时的URL
-    public static final String LEETCODE_PROBLEM_URL = "https://leetcode-cn.com/problems/%s/";
+    public static final String LEETCODE_PROBLEM_CONTENT_URL = "https://leetcode-cn.com/problems/%s/";
+
+    //获取LeetCode所有题目列表的URL
+    public static  final String LEETCODE_PROBLEMS_LIST_URL = "https://leetcode-cn.com/api/problems/all/";
 
     // LeetCode的graphql接口
     public static final String LEETCODE_GRAPHQL = "https://leetcode-cn.com/graphql";

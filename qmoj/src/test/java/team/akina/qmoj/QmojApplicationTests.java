@@ -7,7 +7,10 @@ import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.exception.InvalidConfigurationException;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import team.akina.qmoj.entity.QmojStatStatusPairs;
+import team.akina.qmoj.utils.LeetCodeHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,9 +30,15 @@ class QmojApplicationTests {
      * @throws SQLException
      * @throws InterruptedException
      */
+    @Autowired
+    LeetCodeHelper leetCodeHelper;
     @Test
-    void contextLoads() throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException {
-
+    void contextLoads() throws Exception {
+        for(int i = 0 ;i<leetCodeHelper.getProblemsList().size();i++)
+        {
+            QmojStatStatusPairs zz = leetCodeHelper.getProblemsList().get(i);
+            System.out.println("第"+i+"个键值对的值为"+zz.getLevel()+zz.getQuestion__title_slug()+zz.getQuestion_id());
+        }
 //        List<String> warnings = new ArrayList<String>();
 //        boolean overwrite = true;
 //        File configFile = new File("./src/main/resources/generatorConfig.xml");//直接放在文件下面，与pom.xml同级

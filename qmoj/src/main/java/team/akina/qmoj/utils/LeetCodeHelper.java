@@ -1,14 +1,21 @@
 package team.akina.qmoj.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import lombok.var;
 import org.apache.http.client.CookieStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import team.akina.qmoj.constants.Constants;
+import team.akina.qmoj.entity.QmojStatStatusPairs;
 import team.akina.qmoj.utils.http.HttpRequestHelper;
 import team.akina.qmoj.utils.http.HttpResult;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -57,7 +64,7 @@ public class LeetCodeHelper {
     public String getProblemDetailBySlug(String questionSlug) throws Exception {
         Map<String, String> headers = getDefaultHeader();
         headers.put("Content-Type", "application/json");
-        headers.put("Referer", String.format(Constants.LEETCODE_PROBLEM_URL, "questionSlug"));
+        headers.put("Referer", String.format(Constants.LEETCODE_PROBLEM_CONTENT_URL, "questionSlug"));
 
         String postBody = String.format(Constants.LEETCODE_PROBLEM_DETAIL, questionSlug);
 
@@ -67,6 +74,25 @@ public class LeetCodeHelper {
         }
 
         return null;
+    }
+
+    //返回LeetCode题目列表
+    public List<QmojStatStatusPairs> getProblemsList() throws  Exception{
+        String result = httpRequestHelper.doGet(Constants.LEETCODE_PROBLEMS_LIST_URL);
+        JSONObject jsonObject = JSON.parseObject(result);
+        JSONArray jsonArray = jsonObject.getJSONArray("stat_status_pairs");
+        List<QmojStatStatusPairs>list = new ArrayList<QmojStatStatusPairs>();
+        for(int i = 37;i<jsonArray.size();i++)
+        {
+          JSONObject tempJSON =  JSON.parseObject(jsonArray.getJSONObject(i).get("stat").toString());
+          JSONObject tempJSON2 =  JSON.parseObject(jsonArray.getJSONObject(i).get("difficulty").toString());
+          QmojStatStatusPairs tempQmojStatStatusPairs = new QmojStatStatusPairs();
+          tempQmojStatStatusPairs.setLevel(Integer.parseInt(tempJSON2.getString("level")));
+          tempQmojStatStatusPairs.setQuestion__title_slug(tempJSON.getString("question__title_slug"));
+          tempQmojStatStatusPairs.setQuestion_id(Long.parseLong(tempJSON.getString("question_id")));
+          list.add(tempQmojStatStatusPairs);
+        }
+        return list;
     }
 
 
@@ -81,4 +107,6 @@ public class LeetCodeHelper {
         headers.put("origin", Constants.LEETCODE_URL);
         return headers;
     }
+
+
 }
