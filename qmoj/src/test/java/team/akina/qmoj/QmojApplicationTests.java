@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 @SpringBootTest
 class QmojApplicationTests {
@@ -34,11 +35,19 @@ class QmojApplicationTests {
     LeetCodeHelper leetCodeHelper;
     @Test
     void contextLoads() throws Exception {
-        for(int i = 0 ;i<leetCodeHelper.getProblemsList().size();i++)
-        {
-            QmojStatStatusPairs zz = leetCodeHelper.getProblemsList().get(i);
-            System.out.println("第"+i+"个键值对的值为"+zz.getLevel()+zz.getQuestion__title_slug()+zz.getQuestion_id());
+        Logger logger = Logger.getLogger("test");
+        try{
+            for(int i = 0 ;i<leetCodeHelper.getProblemsList().size();i++)
+            {
+                QmojStatStatusPairs zz = leetCodeHelper.getProblemsList().get(i);
+                logger.info("第"+i+"个键值对的值为"+zz.getLevel()+zz.getQuestion__title_slug()+zz.getQuestion_id());
+            }
         }
+        catch (Exception e)
+        {
+            logger.info("报错！错误信息为："+e.toString());
+        }
+
 //        List<String> warnings = new ArrayList<String>();
 //        boolean overwrite = true;
 //        File configFile = new File("./src/main/resources/generatorConfig.xml");//直接放在文件下面，与pom.xml同级

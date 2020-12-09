@@ -78,18 +78,29 @@ public class LeetCodeHelper {
 
     //返回LeetCode题目列表
     public List<QmojStatStatusPairs> getProblemsList() throws  Exception{
+
         String result = httpRequestHelper.doGet(Constants.LEETCODE_PROBLEMS_LIST_URL);
+
         JSONObject jsonObject = JSON.parseObject(result);
+
         JSONArray jsonArray = jsonObject.getJSONArray("stat_status_pairs");
+
         List<QmojStatStatusPairs>list = new ArrayList<QmojStatStatusPairs>();
+
         for(int i = 0;i<jsonArray.size();i++)
         {
-          JSONObject tempJSON =  JSON.parseObject(jsonArray.getJSONObject(i).get("stat").toString());
-          JSONObject tempJSON2 =  JSON.parseObject(jsonArray.getJSONObject(i).get("difficulty").toString());
+          JSONObject statJSON =  JSON.parseObject(jsonArray.getJSONObject(i).get("stat").toString());
+
+          JSONObject difficultyJSON =  JSON.parseObject(jsonArray.getJSONObject(i).get("difficulty").toString());
+
           QmojStatStatusPairs tempQmojStatStatusPairs = new QmojStatStatusPairs();
-          tempQmojStatStatusPairs.setLevel(Integer.parseInt(tempJSON2.getString("level")));
-          tempQmojStatStatusPairs.setQuestion__title_slug(tempJSON.getString("question__title_slug"));
-          tempQmojStatStatusPairs.setQuestion_id(Long.parseLong(tempJSON.getString("question_id")));
+
+          tempQmojStatStatusPairs.setLevel(Integer.parseInt(difficultyJSON.getString("level")));
+
+          tempQmojStatStatusPairs.setQuestion__title_slug(statJSON.getString("question__title_slug"));
+
+          tempQmojStatStatusPairs.setQuestion_id(Long.parseLong(statJSON.getString("question_id")));
+
           list.add(tempQmojStatStatusPairs);
         }
         return list;
