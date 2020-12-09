@@ -82,7 +82,7 @@ public class LeetCodeHelper {
         JSONObject jsonObject = JSON.parseObject(result);
         JSONArray jsonArray = jsonObject.getJSONArray("stat_status_pairs");
         List<QmojStatStatusPairs>list = new ArrayList<QmojStatStatusPairs>();
-        for(int i = 37;i<jsonArray.size();i++)
+        for(int i = 0;i<jsonArray.size();i++)
         {
           JSONObject tempJSON =  JSON.parseObject(jsonArray.getJSONObject(i).get("stat").toString());
           JSONObject tempJSON2 =  JSON.parseObject(jsonArray.getJSONObject(i).get("difficulty").toString());
