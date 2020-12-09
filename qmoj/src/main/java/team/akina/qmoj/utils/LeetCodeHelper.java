@@ -3,13 +3,14 @@ package team.akina.qmoj.utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import lombok.var;
 import org.apache.http.client.CookieStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import team.akina.qmoj.constants.Constants;
-import team.akina.qmoj.entity.QmojStatStatusPairs;
+import team.akina.qmoj.pojo.QmojStatStatusPairs;
+import team.akina.qmoj.pojo.QmojTitleAndContent;
+import team.akina.qmoj.pojo.QmojTopicTag;
 import team.akina.qmoj.utils.http.HttpRequestHelper;
 import team.akina.qmoj.utils.http.HttpResult;
 
@@ -106,6 +107,70 @@ public class LeetCodeHelper {
         return list;
     }
 
+    //根据题目列表的slug请求对应的题目内容，然后再对返回结果进行解析。
+    public List<QmojTitleAndContent> getTitleAndContentList() throws Exception {
+        List<QmojStatStatusPairs> qmojStatStatusPairs =getProblemsList();
+        List<QmojTitleAndContent>qmojTitleAndContents  = new ArrayList<QmojTitleAndContent>();
+        for(int i = 0 ;i<qmojStatStatusPairs.size();i++)
+        {
+            String responseJson = getProblemDetailBySlug(qmojStatStatusPairs.get(i).getQuestion__title_slug());
+
+            JSONObject dataJson =JSON.parseObject(JSON.parseObject(responseJson).get("data").toString()) ;
+
+            JSONObject questionJson = JSON.parseObject(dataJson.get("question").toString());
+
+            QmojTitleAndContent qmojTitleAndContent = new QmojTitleAndContent();
+
+            if(questionJson.get("translatedTitle")!=null)
+            {
+                qmojTitleAndContent.setTitle(questionJson.get("translatedTitle").toString());
+            }
+            else if(questionJson.get("title")!=null)
+            {
+                qmojTitleAndContent.setTitle(questionJson.get("title").toString());
+            }
+            else
+            {
+                qmojTitleAndContent.setTitle("");
+            }
+
+            if(questionJson.get("translatedContent")!=null)
+            {
+                qmojTitleAndContent.setContent(questionJson.get("translatedContent").toString());
+            }
+            else if(questionJson.get("content")!=null)
+            {
+                qmojTitleAndContent.setContent(questionJson.get("content").toString());
+            }
+            else
+            {
+                qmojTitleAndContent.setContent("");
+            }
+
+
+            JSONArray topicTags = questionJson.getJSONArray("topicTags");
+            List<QmojTopicTag>qmojTopicTags= new ArrayList<QmojTopicTag>();
+            for(int j = 0 ;j<topicTags.size();j++)
+            {
+                QmojTopicTag qmojTopicTag = new QmojTopicTag();
+                qmojTopicTag.setTopictag_name(topicTags.getJSONObject(j).get("name").toString());
+                qmojTopicTag.setTopictag_slug(topicTags.getJSONObject(j).get("slug").toString());
+                if(topicTags.getJSONObject(j).get("translatedName")!=null)
+                {
+                    qmojTopicTag.setTopictag_translatedName(topicTags.getJSONObject(j).get("translatedName").toString());
+                }
+                else
+                {
+                    qmojTopicTag.setTopictag_translatedName("");
+                }
+                qmojTopicTags.add(qmojTopicTag);
+            }
+            qmojTitleAndContent.setTopicTags(qmojTopicTags);
+
+            qmojTitleAndContents.add(qmojTitleAndContent);
+        }
+        return qmojTitleAndContents;
+    }
 
     /**
      * 获取每次请求LeetCode都需要的默认Header

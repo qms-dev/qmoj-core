@@ -2,22 +2,16 @@ package team.akina.qmoj;
 
 import lombok.var;
 import org.junit.jupiter.api.Test;
-import org.mybatis.generator.api.MyBatisGenerator;
-import org.mybatis.generator.config.Configuration;
-import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.exception.InvalidConfigurationException;
 import org.mybatis.generator.exception.XMLParserException;
-import org.mybatis.generator.internal.DefaultShellCallback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import team.akina.qmoj.entity.QmojStatStatusPairs;
+import team.akina.qmoj.pojo.QmojStatStatusPairs;
+import team.akina.qmoj.pojo.QmojTitleAndContent;
 import team.akina.qmoj.utils.LeetCodeHelper;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 @SpringBootTest
@@ -37,12 +31,12 @@ class QmojApplicationTests {
     @Test
     void contextLoads() throws Exception {
         Logger logger = Logger.getLogger("test");
-        var list = leetCodeHelper.getProblemsList();
+        var list = leetCodeHelper.getTitleAndContentList();
         try{
             for(int i = 0 ;i<list.size();i++)
             {
-                QmojStatStatusPairs zz = list.get(i);
-                logger.info("第"+i+"个键值对的值为"+zz.getLevel()+zz.getQuestion__title_slug()+zz.getQuestion_id());
+                QmojTitleAndContent qmojTitleAndContent = list.get(i);
+                logger.info("中文内容为:"+qmojTitleAndContent.getContent()+"中文标题为："+qmojTitleAndContent.getTitle()+"标签数组为："+qmojTitleAndContent.getTopicTags());
             }
         }
         catch (Exception e)
