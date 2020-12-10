@@ -60,7 +60,7 @@ public class HttpClientUtil {
         // 使用HttpClientBuilder提供的静态方法create()来获取HttpClientBuilder对象
         HttpClientBuilder httpClientBuilder = HttpClientBuilder.create().setDefaultCookieStore(httpCookieStore);
 
-        httpClientBuilder.setConnectionManager(httpClientConnectionManager);
+        httpClientBuilder.setConnectionManager(httpClientConnectionManager).setConnectionManagerShared(true);
 
         return httpClientBuilder;
     }

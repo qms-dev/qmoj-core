@@ -20,8 +20,11 @@ public class Constants {
     public static final String LEETCODE_PROBLEM_CONTENT_URL = "https://leetcode-cn.com/problems/%s/";
 
     //获取LeetCode所有题目列表的URL
-    public static  final String LEETCODE_PROBLEMS_LIST_URL = "https://leetcode-cn.com/api/problems/all/";
+    public static final String LEETCODE_PROBLEMS_LIST_URL = "https://leetcode-cn.com/api/problems/all/";
 
     // LeetCode的graphql接口
     public static final String LEETCODE_GRAPHQL = "https://leetcode-cn.com/graphql";
+
+    // 启动时从LeetCode获取题目的指令
+    public static final String PULL_COMMAND = "PULL";
 }
