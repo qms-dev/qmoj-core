@@ -26,7 +26,7 @@ public class ProblemController {
     private static final Logger logger = LoggerFactory.getLogger(ProblemController.class);
 
     /**
-     * Todo 获取题目内容接口，还需完成dto实体及从数据库获取题目
+     * todo 获取题目内容接口，还需完成dto实体及从数据库获取题目
      *
      * @param id 题目ID
      * @return 题目详情

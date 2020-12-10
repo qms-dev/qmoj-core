@@ -2,6 +2,9 @@ package team.akina.qmoj.entity;
 
 import java.util.Date;
 
+/**
+ * todo 实体和数据库的"Question"这个叫法需要调整成"Problem",和LeetCode保持一致叫法的同时也是为了在qmoj统一这个名称
+ */
 public class QmojQuestion {
     private Long id;
 

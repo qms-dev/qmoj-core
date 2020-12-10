@@ -7,7 +7,9 @@ import org.apache.http.client.CookieStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import team.akina.qmoj.constants.Constants;
+import team.akina.qmoj.entity.QmojQuestion;
 import team.akina.qmoj.pojo.QmojStatStatusPairs;
 import team.akina.qmoj.exception.LeetCodeCrawlerException;
 import team.akina.qmoj.utils.http.HttpRequestHelper;
@@ -103,10 +105,10 @@ public class LeetCodeHelper {
     }
 
     /**
-     * todo 从LeetCode拉取数据，并存到数据库表
+     * todo 从LeetCode获取带详情的题目列表
      */
-    public void UpdateProblemList() {
-
+    public List<QmojQuestion> getProblemListWithDetail() {
+        throw new NotImplementedException();
     }
 
     /**

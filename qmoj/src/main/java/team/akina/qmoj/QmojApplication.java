@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import team.akina.qmoj.constants.Constants;
+import team.akina.qmoj.service.QmojQuestionService;
 import team.akina.qmoj.utils.LeetCodeHelper;
 
 @SpringBootApplication(scanBasePackages = "team.akina.qmoj")
@@ -17,7 +18,7 @@ public class QmojApplication implements CommandLineRunner {
     }
 
     @Autowired
-    LeetCodeHelper leetCodeHelper;
+    QmojQuestionService qmojQuestionService;
 
     /**
      * 使用特定参数(pull)启动程序时更新数据库中的题目
@@ -28,8 +29,9 @@ public class QmojApplication implements CommandLineRunner {
     public void run(String... args) {
         if (args != null && args.length > 0) {
             if (args[0].toUpperCase().equals(Constants.PULL_COMMAND)) {
-                System.out.println("开始爬取最新题目");
-                leetCodeHelper.UpdateProblemList();
+                System.out.println("开始爬取并更新题库");
+                qmojQuestionService.updateProblemsFromLeetCode();
+                System.out.println("题库更新完成");
             }
         }
     }
