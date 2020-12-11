@@ -28,8 +28,8 @@ class QmojApplicationTests {
 
     @Test
     void contextLoads() {
-        for (int i = 0; i < leetCodeHelper.getProblemsList().size(); i++) {
-            QmojStatStatusPairs zz = leetCodeHelper.getProblemsList().get(i);
+        for (int i = 0; i < leetCodeHelper.getQuestionsList().size(); i++) {
+            QmojStatStatusPairs zz = leetCodeHelper.getQuestionsList().get(i);
             System.out.println("第" + i + "个键值对的值为" + zz.getLevel() + zz.getQuestion__title_slug() + zz.getQuestion_id());
         }
     }

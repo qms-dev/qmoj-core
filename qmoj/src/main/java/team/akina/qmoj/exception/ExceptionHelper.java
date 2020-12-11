@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import team.akina.qmoj.constants.Response;
-import team.akina.qmoj.controller.HelloController;
 
 import java.util.Arrays;
 
@@ -14,6 +13,7 @@ import java.util.Arrays;
 @RestControllerAdvice
 public class ExceptionHelper {
 
+    // todo 日志需要进行简单配置，配置为可以按照日期，类型进行分类
     private static final Logger logger = LoggerFactory.getLogger(ExceptionHelper.class);
 
     /**
@@ -21,7 +21,7 @@ public class ExceptionHelper {
      */
     @ExceptionHandler(value = {InvalidInputException.class})
     public Response handleInvalidInputException(InvalidInputException ex) {
-        logger.error(Arrays.toString(ex.getStackTrace()));
+        logger.error(ex.getDetailLogInfo());
         return Response.fail("输入参数异常:" + ex.getMsg());
     }
 
@@ -30,7 +30,7 @@ public class ExceptionHelper {
      */
     @ExceptionHandler(value = {LeetCodeCrawlerException.class})
     public Response handleLeetCodeCrawlerException(LeetCodeCrawlerException ex) {
-        logger.error(Arrays.toString(ex.getStackTrace()));
+        logger.error(ex.getDetailLogInfo());
         return Response.fail("请求LeetCode发生异常:" + ex.getMsg());
     }
 

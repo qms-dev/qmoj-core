@@ -65,7 +65,7 @@ public class LeetCodeHelper {
      * @param questionSlug 题目的Slug，对LeetCode来说就是每道题的url的最后一部分
      * @return LeetCode返回的题目内容
      */
-    public String getProblemDetailBySlug(String questionSlug) {
+    public String getQuestionDetailBySlug(String questionSlug) {
         try {
             Map<String, String> headers = getDefaultHeader();
             headers.put("Content-Type", "application/json");
@@ -78,12 +78,12 @@ public class LeetCodeHelper {
             return StringUtil.decodeUnicode(result.getBody());
 
         } catch (IOException ex) {
-            throw new LeetCodeCrawlerException("获取题目详情发生错误", ex);
+            throw new LeetCodeCrawlerException("获取题目详情发生错误", ex, questionSlug);
         }
     }
 
     //返回LeetCode题目列表
-    public List<QmojStatStatusPairs> getProblemsList() {
+    public List<QmojStatStatusPairs> getQuestionsList() {
         try {
             HttpResult result = httpRequestHelper.doGet(Constants.LEETCODE_PROBLEMS_LIST_URL);
             JSONObject jsonObject = JSON.parseObject(result.getBody());
@@ -107,7 +107,7 @@ public class LeetCodeHelper {
     /**
      * todo 从LeetCode获取带详情的题目列表
      */
-    public List<QmojQuestion> getProblemListWithDetail() {
+    public List<QmojQuestion> getQuestionListWithDetail() {
         throw new NotImplementedException();
     }
 

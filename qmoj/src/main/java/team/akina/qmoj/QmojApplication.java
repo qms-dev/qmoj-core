@@ -30,7 +30,7 @@ public class QmojApplication implements CommandLineRunner {
         if (args != null && args.length > 0) {
             if (args[0].toUpperCase().equals(Constants.PULL_COMMAND)) {
                 System.out.println("开始爬取并更新题库");
-                qmojQuestionService.updateProblemsFromLeetCode();
+                qmojQuestionService.updateQuestionsFromLeetCode();
                 System.out.println("题库更新完成");
             }
         }

@@ -14,8 +14,8 @@ import team.akina.qmoj.utils.LeetCodeHelper;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/problem")
-public class ProblemController {
+@RequestMapping("/api/question")
+public class QuestionController {
 
     @Autowired
     private QmojLanguageService qmojLanguageService;
@@ -23,7 +23,7 @@ public class ProblemController {
     @Autowired
     private LeetCodeHelper leetCodeHelper;
 
-    private static final Logger logger = LoggerFactory.getLogger(ProblemController.class);
+    private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
 
     /**
      * todo 获取题目内容接口，还需完成dto实体及从数据库获取题目
@@ -32,7 +32,7 @@ public class ProblemController {
      * @return 题目详情
      */
     @RequestMapping
-    public Response getProblemContent(@RequestParam("id") int id) {
+    public Response getQuestionContent(@RequestParam("id") int id) {
         return Response.success("题目:" + id);
     }
 }
