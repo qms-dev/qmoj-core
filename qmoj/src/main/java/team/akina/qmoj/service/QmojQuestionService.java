@@ -5,5 +5,5 @@ public interface QmojQuestionService {
     /**
      * 从LeetCode爬取数据并插入到数据库
      */
-    void updateProblemsFromLeetCode();
+    void updateQuestionsFromLeetCode();
 }

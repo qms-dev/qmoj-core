@@ -33,10 +33,10 @@ public class HelloController {
      */
     @RequestMapping("/helloqmoj/{slug}")
     public Response hello(@PathVariable String slug) {
-        if (slug.equals("")) {
-            throw new InvalidInputException("请输入正确的题目标识");
+        if (slug.equals("1")) {
+            throw new InvalidInputException("请输入正确的题目标识", slug);
         }
-        return Response.success(leetCodeHelper.getProblemDetailBySlug(slug));
+        return Response.success(leetCodeHelper.getQuestionDetailBySlug(slug));
     }
 
     /**
