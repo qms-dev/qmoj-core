@@ -1,4 +1,4 @@
-package team.akina.qmoj.pojo;
+package team.akina.qmoj.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
