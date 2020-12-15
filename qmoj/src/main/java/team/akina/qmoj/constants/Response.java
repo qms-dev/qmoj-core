@@ -13,12 +13,11 @@ public class Response<T> implements Serializable {
 
     private static final long serialVersionUID = 6341861816047074162L;
 
-
     /**
      * 定义统用的成功失败取值
      */
     public static final int SUCCESS_FLAG = 0;
-    public static final int FAIL_FLAG = 0;
+    public static final int FAIL_FLAG = -1;
 
 
     private Integer status;
@@ -40,13 +39,44 @@ public class Response<T> implements Serializable {
         this.msg = msg;
     }
 
-    // TODO: 2020/12/4 把常见的返回如success，fail等写成静态方法，方便包装返回
+    /**
+     * 返回通用success静态方法
+     *
+     * @param data 数据实体
+     * @param <T>  数据类型
+     * @return 完整的响应实体
+     */
     public static <T> Response<T> success(T data) {
-        Response ret = new Response(SUCCESS_FLAG);
+        Response<T> ret = new Response<T>(SUCCESS_FLAG);
         ret.setData(data);
         return ret;
     }
 
+    /**
+     * 返回通用的带message的fail
+     *
+     * @param msg 错误信息
+     * @return 完整的响应实体
+     */
+    public static <T> Response<T> fail(String msg) {
+        Response<T> ret = new Response<T>(FAIL_FLAG);
+        ret.setMsg(msg);
+        return ret;
+    }
+
+    /**
+     * 返回带指定错误码的fail静态方法
+     *
+     * @param status 指定错误码
+     * @param msg    错误信息
+     * @return 完整的响应实体
+     */
+    public static <T> Response<T> fail(int status, String msg) {
+        Response<T> ret = new Response<T>(status);
+        ret.setStatus(status);
+        ret.setMsg(msg);
+        return ret;
+    }
 
     public Integer getStatus() {
         return status;

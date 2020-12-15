@@ -1,6 +1,7 @@
 package team.akina.qmoj.utils.http;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -14,7 +15,12 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import team.akina.qmoj.exception.InvalidInputException;
+import team.akina.qmoj.utils.LeetCodeHelper;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,24 +28,19 @@ import java.util.Map;
 @Component
 public class HttpRequestHelper {
 
+    @Autowired
     private CloseableHttpClient httpClient;
 
-    private RequestConfig config;
-
     @Autowired
-    public void setUserDao(CloseableHttpClient httpClient, RequestConfig config) {
-        this.httpClient = httpClient;
-        this.config = config;
-    }
+    private RequestConfig config;
 
     /**
      * 无参get请求，如果状态码为200，则返回body，否则返回null
      *
      * @param url 请求的url
      * @return UTF-8格式的请求结果字符串，如果状态码不为200，返回null
-     * @throws Exception
      */
-    public String doGet(String url) throws Exception {
+    public HttpResult doGet(String url) throws IOException {
         // 声明 http get 请求
         HttpGet httpGet = new HttpGet(url);
         HttpResult httpResult = new HttpResult();
@@ -50,13 +51,8 @@ public class HttpRequestHelper {
         // 发起请求
         CloseableHttpResponse response = this.httpClient.execute(httpGet);
 
-        // 判断状态码是否为200
-        if (response.getStatusLine().getStatusCode() == 200) {
-            // 返回响应体的内容
-            return EntityUtils.toString(response.getEntity(), "UTF-8");
-        }
-
-        return null;
+        return new HttpResult(response.getStatusLine().getStatusCode(), EntityUtils.toString(
+                response.getEntity(), "UTF-8"));
     }
 
 
@@ -66,9 +62,8 @@ public class HttpRequestHelper {
      * @param url 请求的url
      * @param map 携带的参数
      * @return UTF-8格式的请求结果字符串，如果状态码不为200，返回null
-     * @throws Exception
      */
-    public String doGet(String url, Map<String, Object> map) throws Exception {
+    public HttpResult doGet(String url, Map<String, Object> map) throws IOException, URISyntaxException {
         URIBuilder uriBuilder = new URIBuilder(url);
 
         if (map != null) {
@@ -89,9 +84,8 @@ public class HttpRequestHelper {
      * @param formContent form表单内容
      * @param headers     请求要带的header
      * @return HttpResult实体类，包含状态码和返回内容
-     * @throws Exception
      */
-    public HttpResult doPost(String url, Map<String, Object> formContent, Map<String, String> headers) throws Exception {
+    public HttpResult doPost(String url, Map<String, Object> formContent, Map<String, String> headers) throws IOException {
         // 声明httpPost请求
         HttpPost httpPost = new HttpPost(url);
         // 加入配置信息
@@ -132,7 +126,7 @@ public class HttpRequestHelper {
      * @return HttpResult实体类，包含状态码和返回内容
      * @throws Exception
      */
-    public HttpResult doPost(String url) throws Exception {
+    public HttpResult doPost(String url) throws IOException {
         return this.doPost(url, null, null);
     }
 
@@ -143,9 +137,8 @@ public class HttpRequestHelper {
      * @param jsonContent body内容，json字符串
      * @param headers     请求要带的header
      * @return HttpResult实体类，包含状态码和返回内容
-     * @throws Exception
      */
-    public HttpResult doJsonPost(String url, String jsonContent, Map<String, String> headers) throws Exception {
+    public HttpResult doJsonPost(String url, String jsonContent, Map<String, String> headers) throws IOException {
         // 声明httpPost请求
         HttpPost httpPost = new HttpPost(url);
 
@@ -162,5 +155,6 @@ public class HttpRequestHelper {
         CloseableHttpResponse response = httpClient.execute(httpPost);
         return new HttpResult(response.getStatusLine().getStatusCode(), EntityUtils.toString(
                 response.getEntity(), "UTF-8"));
+
     }
 }

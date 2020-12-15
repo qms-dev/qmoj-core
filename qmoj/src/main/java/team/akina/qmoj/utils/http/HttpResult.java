@@ -1,5 +1,7 @@
 package team.akina.qmoj.utils.http;
 
+import org.apache.http.HttpStatus;
+
 public class HttpResult {
 
     // 响应码
@@ -34,4 +36,7 @@ public class HttpResult {
         this.body = body;
     }
 
+    public boolean isSuccess() {
+        return this.code == HttpStatus.SC_OK;
+    }
 }
