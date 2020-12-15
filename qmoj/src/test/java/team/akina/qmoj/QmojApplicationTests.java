@@ -1,6 +1,5 @@
 package team.akina.qmoj;
 
-import lombok.var;
 import org.junit.jupiter.api.Test;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
@@ -37,11 +36,10 @@ class QmojApplicationTests {
     @Test
     void contextLoads() throws Exception {
         Logger logger = Logger.getLogger("test");
-        var list = leetCodeHelper.getProblemsList();
         try{
-            for(int i = 0 ;i<list.size();i++)
+            for(int i = 0 ;i<leetCodeHelper.getProblemsList().size();i++)
             {
-                QmojStatStatusPairs zz = list.get(i);
+                QmojStatStatusPairs zz = leetCodeHelper.getProblemsList().get(i);
                 logger.info("第"+i+"个键值对的值为"+zz.getLevel()+zz.getQuestion__title_slug()+zz.getQuestion_id());
             }
         }
