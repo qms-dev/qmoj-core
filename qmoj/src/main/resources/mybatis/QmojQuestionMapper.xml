@@ -14,12 +14,13 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="team.akina.qmoj.entity.QmojQuestionWithBLOBs">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="lang_to_valid_playground" jdbcType="LONGVARCHAR" property="langToValidPlayground" />
+    <result column="question_tags" jdbcType="LONGVARCHAR" property="questionTags" />
   </resultMap>
   <sql id="Base_Column_List">
     id, question_id, title, difficulty, create_time, modify_time, platform, question_slug
   </sql>
   <sql id="Blob_Column_List">
-    content, lang_to_valid_playground
+    content, lang_to_valid_playground, question_tags
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
@@ -37,11 +38,13 @@
     insert into qmoj_question (id, question_id, title, 
       difficulty, create_time, modify_time, 
       platform, question_slug, content, 
-      lang_to_valid_playground)
+      lang_to_valid_playground, question_tags
+      )
     values (#{id,jdbcType=BIGINT}, #{questionId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
       #{difficulty,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
       #{platform,jdbcType=TINYINT}, #{questionSlug,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, 
-      #{langToValidPlayground,jdbcType=LONGVARCHAR})
+      #{langToValidPlayground,jdbcType=LONGVARCHAR}, #{questionTags,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="team.akina.qmoj.entity.QmojQuestionWithBLOBs">
     insert into qmoj_question
@@ -76,6 +79,9 @@
       <if test="langToValidPlayground != null">
         lang_to_valid_playground,
       </if>
+      <if test="questionTags != null">
+        question_tags,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -107,6 +113,9 @@
       </if>
       <if test="langToValidPlayground != null">
         #{langToValidPlayground,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="questionTags != null">
+        #{questionTags,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -140,6 +149,9 @@
       <if test="langToValidPlayground != null">
         lang_to_valid_playground = #{langToValidPlayground,jdbcType=LONGVARCHAR},
       </if>
+      <if test="questionTags != null">
+        question_tags = #{questionTags,jdbcType=LONGVARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -153,7 +165,8 @@
       platform = #{platform,jdbcType=TINYINT},
       question_slug = #{questionSlug,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
-      lang_to_valid_playground = #{langToValidPlayground,jdbcType=LONGVARCHAR}
+      lang_to_valid_playground = #{langToValidPlayground,jdbcType=LONGVARCHAR},
+      question_tags = #{questionTags,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="team.akina.qmoj.entity.QmojQuestion">
