@@ -27,4 +27,7 @@ public class Constants {
 
     // 启动时从LeetCode获取题目的指令
     public static final String PULL_COMMAND = "PULL";
+
+    //默认编程语言！
+    public  static  final  String DEFAULT_PROGRAMMING_LANGUAGE = "[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]";
 }

@@ -1,7 +1,9 @@
 package team.akina.qmoj.entity;
 
-    public class QmojQuestionWithBLOBs extends QmojQuestion {
+public class QmojQuestionWithBLOBs extends QmojQuestion {
+
     private String content;
+
 
     private String langToValidPlayground;
 

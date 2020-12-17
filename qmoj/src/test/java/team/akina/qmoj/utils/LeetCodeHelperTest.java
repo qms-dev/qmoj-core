@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import team.akina.qmoj.constants.Constants;
+import team.akina.qmoj.service.QmojQuestionService;
 import team.akina.qmoj.utils.http.HttpRequestHelper;
 import team.akina.qmoj.utils.http.HttpResult;
 
@@ -29,6 +30,9 @@ public class LeetCodeHelperTest {
 
     @Autowired
     CookieStore cookieStore;
+
+    @Autowired
+    QmojQuestionService qmojQuestionService;
 
     @Test
     void login() {
@@ -82,5 +86,11 @@ public class LeetCodeHelperTest {
 
         // 验证是否提交成功，在返回的body里会有这次的提交流水号
         assertEquals(result.getCode(), HttpStatus.SC_OK);
+    }
+
+    @Test
+    void updateQuestions()
+    {
+        qmojQuestionService.updateQuestionsFromLeetCode();
     }
 }

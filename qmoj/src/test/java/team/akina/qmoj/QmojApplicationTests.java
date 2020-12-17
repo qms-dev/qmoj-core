@@ -38,13 +38,7 @@ class QmojApplicationTests {
 
     @Test
     void contextLoads() throws Exception {
-        Logger logger = Logger.getLogger("test");
-        var list = leetCodeHelper.getTitleAndContentList();
 
-        for (int i = 0; i < list.size(); i++) {
-            QmojTitleAndContent qmojTitleAndContent = list.get(i);
-            logger.info("中文内容为:"+qmojTitleAndContent.getContent()+"中文标题为："+qmojTitleAndContent.getTitle()+"标签数组为："+qmojTitleAndContent.getTopicTags());
-        }
     }
 
     @Test
