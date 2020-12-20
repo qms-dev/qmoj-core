@@ -37,6 +37,15 @@ public class ExceptionHelper {
     /**
      * 兜底的异常
      */
+    @ExceptionHandler(value = {DataNotFindException.class})
+    public Response dataNotFindException(DataNotFindException ex) {
+        logger.error(Arrays.toString(ex.getStackTrace()));
+        return Response.fail("查询数据异常:" + ex.getMsg());
+    }
+
+    /**
+     * 兜底的异常
+     */
     @ExceptionHandler(Exception.class)
     public Response runtimeException(Exception ex) {
         logger.error(Arrays.toString(ex.getStackTrace()));
