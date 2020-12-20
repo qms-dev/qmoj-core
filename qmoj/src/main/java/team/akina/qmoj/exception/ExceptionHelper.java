@@ -35,7 +35,7 @@ public class ExceptionHelper {
     }
 
     /**
-     * 兜底的异常
+     * 没有找到数据时引发的异常
      */
     @ExceptionHandler(value = {DataNotFindException.class})
     public Response dataNotFindException(DataNotFindException ex) {

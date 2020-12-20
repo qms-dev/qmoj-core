@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team.akina.qmoj.constants.Response;
-import team.akina.qmoj.dto.QmojQuestionDto;
+import team.akina.qmoj.dto.QmojQuestionDTO;
 import team.akina.qmoj.exception.DataNotFindException;
 import team.akina.qmoj.service.QmojQuestionService;
 
@@ -29,7 +29,7 @@ public class QuestionController {
      */
     @RequestMapping("/questions")
     public Response getQuestionContent(@RequestParam("id") int id) {
-        QmojQuestionDto question = qmojQuestionService.getQuestionById(id);
+        QmojQuestionDTO question = qmojQuestionService.getQuestionById(id);
         if (question == null) {
             throw new DataNotFindException("没有找到对应题目", id);
         }

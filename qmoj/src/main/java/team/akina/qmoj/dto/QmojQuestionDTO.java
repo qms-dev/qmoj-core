@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 题目内容的dto类，沿用chenbo以来的命名风格，添加Qmoj前缀
  */
-public class QmojQuestionDto {
+public class QmojQuestionDTO {
     /**
      * 平台唯一题目ID
      */
@@ -39,8 +39,7 @@ public class QmojQuestionDto {
     /**
      * 题目的标签，中文形式
      */
-    private List<String> topic_tags;
-
+    private List<String> topicTags;
 
     public long getId() {
         return id;
@@ -90,11 +89,11 @@ public class QmojQuestionDto {
         this.languages = languages;
     }
 
-    public List<String> getTopic_tags() {
-        return topic_tags;
+    public List<String> getTopicTags() {
+        return topicTags;
     }
 
-    public void setTopic_tags(List<String> topic_tags) {
-        this.topic_tags = topic_tags;
+    public void setTopicTags(List<String> topicTags) {
+        this.topicTags = topicTags;
     }
 }

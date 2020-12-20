@@ -1,6 +1,6 @@
 package team.akina.qmoj.service;
 
-import team.akina.qmoj.dto.QmojQuestionDto;
+import team.akina.qmoj.dto.QmojQuestionDTO;
 
 public interface QmojQuestionService {
 
@@ -14,5 +14,5 @@ public interface QmojQuestionService {
      * @param id 题目id
      * @return
      */
-    QmojQuestionDto getQuestionById(long id);
+    QmojQuestionDTO getQuestionById(long id);
 }

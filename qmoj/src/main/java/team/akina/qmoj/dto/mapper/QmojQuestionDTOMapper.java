@@ -5,15 +5,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
-import team.akina.qmoj.constants.Enums;
-import team.akina.qmoj.dto.QmojQuestionDto;
+import team.akina.qmoj.dto.QmojQuestionDTO;
 import team.akina.qmoj.entity.QmojQuestionWithBLOBs;
 
 import java.util.List;
 
 @Mapper
-public interface QmojQuestionDtoMapper {
-    QmojQuestionDtoMapper INSTANCE = Mappers.getMapper(QmojQuestionDtoMapper.class);
+public interface QmojQuestionDTOMapper {
+    QmojQuestionDTOMapper INSTANCE = Mappers.getMapper(QmojQuestionDTOMapper.class);
 
 
     /**
@@ -21,21 +20,11 @@ public interface QmojQuestionDtoMapper {
      * @param question 题目详情实体
      * @return
      */
-    @Mappings({@Mapping(target = "platform", expression = "java(platFormConvert(question.getPlatform()))"),
+    @Mappings({@Mapping(target = "platform", expression = "java(team.akina.qmoj.constants.PlatformNums.getName(question.getPlatform()))"),
             @Mapping(target = "languages", expression = "java(languagesConvert(question.getLangToValidPlayground()))"),
-            @Mapping(target = "topic_tags", expression = "java(tagsConvert(question.getQuestionTags()))")})
-    QmojQuestionDto questionToQuestionDto(QmojQuestionWithBLOBs question);
+            @Mapping(target = "topicTags", expression = "java(tagsConvert(question.getQuestionTags()))")})
+    QmojQuestionDTO questionToQuestionDTO(QmojQuestionWithBLOBs question);
 
-
-    /**
-     * 转换平台类型
-     *
-     * @param code 平台类型编码
-     * @return
-     */
-    default String platFormConvert(byte code) {
-        return Enums.Platform.getName(code);
-    }
 
     /**
      * 转换语言列表

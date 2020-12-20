@@ -3,9 +3,11 @@ package team.akina.qmoj.dto;
 import com.alibaba.fastjson.JSON;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import team.akina.qmoj.dto.mapper.QmojQuestionDtoMapper;
+import org.springframework.format.annotation.DateTimeFormat;
+import team.akina.qmoj.dto.mapper.QmojQuestionDTOMapper;
 import team.akina.qmoj.entity.QmojQuestionWithBLOBs;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -14,7 +16,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class DtoConvertTest {
+public class DTOConvertTest {
 
     /**
      * 测试转换结果
@@ -33,20 +35,17 @@ public class DtoConvertTest {
         question.setTitle("两数之和");
         question.setQuestionTags("[\"数组\",\"哈希表\"]");
 
-        QmojQuestionDto questionDto = QmojQuestionDtoMapper.INSTANCE.questionToQuestionDto(question);
+        QmojQuestionDTO questionDto = QmojQuestionDTOMapper.INSTANCE.questionToQuestionDTO(question);
 
         assertEquals(question.getContent(), questionDto.getContent());
-        assertEquals(question.getQuestionTags(), JSON.toJSONString(questionDto.getTopic_tags()));
+        assertEquals(question.getQuestionTags(), JSON.toJSONString(questionDto.getTopicTags()));
     }
 
     /**
      * 获取当前时间
      */
     public Date getCurrentTime() {
-        ZoneId zoneId = ZoneId.systemDefault();
-        //Combines this date-time with a time-zone to create a  ZonedDateTime.
-        ZonedDateTime zdt = LocalDateTime.now().atZone(zoneId);
-        return Date.from(zdt.toInstant());
+        return new Date();
     }
 
 }

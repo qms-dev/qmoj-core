@@ -2,10 +2,9 @@ package team.akina.qmoj.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import team.akina.qmoj.dto.QmojQuestionDto;
-import team.akina.qmoj.dto.mapper.QmojQuestionDtoMapper;
+import team.akina.qmoj.dto.QmojQuestionDTO;
+import team.akina.qmoj.dto.mapper.QmojQuestionDTOMapper;
 import team.akina.qmoj.entity.QmojQuestion;
-import team.akina.qmoj.mapper.QmojLanguageMapper;
 import team.akina.qmoj.mapper.QmojQuestionMapper;
 import team.akina.qmoj.service.QmojQuestionService;
 import team.akina.qmoj.utils.LeetCodeHelper;
@@ -37,7 +36,7 @@ public class QmojQuestionServiceImpl implements QmojQuestionService {
      * @return
      */
     @Override
-    public QmojQuestionDto getQuestionById(long id) {
-        return QmojQuestionDtoMapper.INSTANCE.questionToQuestionDto(qmojQuestionMapper.selectByPrimaryKey(id));
+    public QmojQuestionDTO getQuestionById(long id) {
+        return QmojQuestionDTOMapper.INSTANCE.questionToQuestionDTO(qmojQuestionMapper.selectByPrimaryKey(id));
     }
 }
