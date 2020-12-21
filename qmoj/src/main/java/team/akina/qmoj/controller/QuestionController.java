@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team.akina.qmoj.constants.Response;
 import team.akina.qmoj.dto.QmojQuestionDTO;
+import team.akina.qmoj.entity.QmojQuestionSummary;
 import team.akina.qmoj.exception.DataNotFindException;
 import team.akina.qmoj.service.QmojQuestionService;
+
+import java.util.List;
 
 /**
  * 操作题目相关接口
@@ -34,5 +37,20 @@ public class QuestionController {
             throw new DataNotFindException("没有找到对应题目", id);
         }
         return Response.success(question);
+    }
+
+    /**
+     * 获取所有题目摘要列表
+     * todo 虽然题目不多，但是这里访问频率较高且涉及全表扫描，后续引入redis协助数据持久化
+     * @return 所有题目摘要列表
+     */
+    @RequestMapping("/questionset")
+    public Response getQuestionSet()
+    {
+        List<QmojQuestionSummary> questionSet = qmojQuestionService.getQuestionSet();
+        if (questionSet == null) {
+            throw new DataNotFindException("没有获取到任何题目");
+        }
+        return Response.success(questionSet);
     }
 }

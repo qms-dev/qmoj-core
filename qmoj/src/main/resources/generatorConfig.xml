@@ -38,19 +38,35 @@
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
+               selectByExampleQueryId="false"/>
 
         <table tableName="qmoj_question_status" domainObjectName="QmojQuestionStatus" enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
+               selectByExampleQueryId="false"/>
 
         <table tableName="qmoj_language" domainObjectName="QmojLanguage" enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
+               selectByExampleQueryId="false"/>
+
+        <!--只含题目摘要相关字段，用于显示题目列表-->
+        <table tableName="qmoj_question" domainObjectName="QmojQuestionSummary" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <ignoreColumn column="question_id"/>
+            <ignoreColumn column="content"/>
+            <ignoreColumn column="lang_to_valid_playground"/>
+            <ignoreColumn column="create_time"/>
+            <ignoreColumn column="modify_time"/>
+            <ignoreColumn column="platform"/>
+            <ignoreColumn column="question_slug"/>
+        </table>
+
     </context>
 </generatorConfiguration>
 

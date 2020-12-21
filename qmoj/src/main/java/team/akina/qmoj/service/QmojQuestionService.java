@@ -1,6 +1,9 @@
 package team.akina.qmoj.service;
 
 import team.akina.qmoj.dto.QmojQuestionDTO;
+import team.akina.qmoj.entity.QmojQuestionSummary;
+
+import java.util.List;
 
 public interface QmojQuestionService {
 
@@ -15,4 +18,11 @@ public interface QmojQuestionService {
      * @return
      */
     QmojQuestionDTO getQuestionById(long id);
+
+    /**
+     * 获取所有题目摘要列表
+     *
+     * @return 所有题目摘要列表
+     */
+    List<QmojQuestionSummary> getQuestionSet();
 }
