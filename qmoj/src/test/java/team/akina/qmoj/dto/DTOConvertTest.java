@@ -33,12 +33,12 @@ public class DTOConvertTest {
         question.setLangToValidPlayground(null);
         question.setQuestionSlug("two-sum");
         question.setTitle("两数之和");
-        question.setQuestionTags("[\"数组\",\"哈希表\"]");
+        question.setTopicTags("[\"数组\",\"哈希表\"]");
 
         QmojQuestionDTO questionDto = QmojQuestionDTOMapper.INSTANCE.questionToQuestionDTO(question);
 
         assertEquals(question.getContent(), questionDto.getContent());
-        assertEquals(question.getQuestionTags(), JSON.toJSONString(questionDto.getTopicTags()));
+        assertEquals(question.getTopicTags(), JSON.toJSONString(questionDto.getTopicTags()));
     }
 
     /**

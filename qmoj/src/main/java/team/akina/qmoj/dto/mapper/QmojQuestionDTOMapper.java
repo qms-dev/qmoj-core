@@ -20,6 +20,6 @@ public interface QmojQuestionDTOMapper {
      */
     @Mappings({@Mapping(target = "platform", expression = "java(team.akina.qmoj.constants.PlatformEnums.getName(question.getPlatform()))"),
             @Mapping(target = "languages", expression = "java(team.akina.qmoj.utils.FieldConvertUtil.convertJsonToIntegerList(question.getLangToValidPlayground()))"),
-            @Mapping(target = "topicTags", expression = "java(team.akina.qmoj.utils.FieldConvertUtil.convertJsonToStringList(question.getQuestionTags()))")})
+            @Mapping(target = "topicTags", expression = "java(team.akina.qmoj.utils.FieldConvertUtil.convertJsonToStringList(question.getTopicTags()))")})
     QmojQuestionDTO questionToQuestionDTO(QmojQuestionWithBLOBs question);
 }

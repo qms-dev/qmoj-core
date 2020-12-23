@@ -7,7 +7,7 @@ public class QmojQuestionSummary {
 
     private Byte difficulty;
 
-    private String questionTags;
+    private String topicTags;
 
     public Long getId() {
         return id;
@@ -33,11 +33,11 @@ public class QmojQuestionSummary {
         this.difficulty = difficulty;
     }
 
-    public String getQuestionTags() {
-        return questionTags;
+    public String getTopicTags() {
+        return topicTags;
     }
 
-    public void setQuestionTags(String questionTags) {
-        this.questionTags = questionTags == null ? null : questionTags.trim();
+    public void setTopicTags(String topicTags) {
+        this.topicTags = topicTags == null ? null : topicTags.trim();
     }
 }
