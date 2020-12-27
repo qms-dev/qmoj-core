@@ -39,8 +39,17 @@ public class ExceptionHelper {
      */
     @ExceptionHandler(value = {DataNotFindException.class})
     public Response dataNotFindException(DataNotFindException ex) {
-        logger.error(Arrays.toString(ex.getStackTrace()));
+        logger.error(ex.getDetailLogInfo());
         return Response.fail("查询数据异常:" + ex.getMsg());
+    }
+
+    /**
+     * 线程中断异常
+     */
+    @ExceptionHandler(InterruptedException.class)
+    public Response interruptedException(InterruptedException ex) {
+        logger.error(Arrays.toString(ex.getStackTrace()));
+        return Response.fail("线程中断异常！请稍后重试！");
     }
 
     /**

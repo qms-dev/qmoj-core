@@ -29,7 +29,7 @@ http:
   # 并发数
   defaultMaxPerRoute: 20
   # 创建连接的最长时间
-  connectTimeout: 1000
+  connectTimeout: 1500
   # 从连接池中获取到连接的最长时间
   connectionRequestTimeout: 2000
   # 数据传输的最长时间

@@ -25,7 +25,7 @@ public class HttpClientTest {
                 public void run() {
                     try {
                         Thread.sleep(finalI * 50);
-                        httpRequestHelper.doGet(Constants.LEETCODE_URL);
+                        httpRequestHelper.doGet(Constants.LEETCODE_URL, null);
                         System.out.println(Thread.currentThread().getName());
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();

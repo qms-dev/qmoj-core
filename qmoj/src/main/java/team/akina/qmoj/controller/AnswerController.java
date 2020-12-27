@@ -2,12 +2,12 @@ package team.akina.qmoj.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import team.akina.qmoj.constants.Response;
-import team.akina.qmoj.dto.QmojQuestionDTO;
-import team.akina.qmoj.exception.DataNotFindException;
 import team.akina.qmoj.pojo.QmojAnswer;
+import team.akina.qmoj.service.QmojAnswerService;
 import team.akina.qmoj.service.QmojQuestionService;
 
 @RestController
@@ -17,16 +17,18 @@ public class AnswerController {
     @Autowired
     private QmojQuestionService qmojQuestionService;
 
+    @Autowired
+    private QmojAnswerService qmojAnswerService;
 
     /**
-     * 提交题解 todo 还需完成根据qmoj题目id查询到leetcode题目id，然后根据id提交题目(参照LeetCodeHelperTest)
+     * 提交题解
      *
-     * @param answer
+     * @param answer 题解信息
      * @return
      */
     @RequestMapping("/answers/submit")
     public Response getQuestionContent(@RequestBody QmojAnswer answer) {
-        throw new NotImplementedException();
+        return Response.success(qmojAnswerService.submitAnswer(answer));
     }
 
 }

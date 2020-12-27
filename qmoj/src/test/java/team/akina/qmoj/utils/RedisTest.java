@@ -5,10 +5,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import team.akina.qmoj.pojo.LeetCodeAnswer;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,7 +22,7 @@ public class RedisTest {
      */
     @Test
     public void testOpsForValue() {
-        Answer answer = new Answer();
+        LeetCodeAnswer answer = new LeetCodeAnswer();
 
         // 设置请求参数
         answer.setJudge_type("large");
@@ -37,7 +36,7 @@ public class RedisTest {
         valueOperations.set(keyName, answer);
         // 检查添加结果
         assertTrue(redisTemplate.hasKey(keyName));
-        Answer answerFromRedis = (Answer) valueOperations.get(keyName);
+        LeetCodeAnswer answerFromRedis = (LeetCodeAnswer) valueOperations.get(keyName);
         // 检查获取到的数据是否和原来的数据相同
         Assertions.assertEquals(JSON.toJSONString(answer), JSON.toJSONString(answerFromRedis));
     }
