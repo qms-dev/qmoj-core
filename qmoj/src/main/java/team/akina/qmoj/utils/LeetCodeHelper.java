@@ -15,6 +15,7 @@ import team.akina.qmoj.constants.LanguageEnums;
 import team.akina.qmoj.entity.QmojQuestion;
 import team.akina.qmoj.exception.InvalidInputException;
 import team.akina.qmoj.exception.LeetCodeCrawlerException;
+import team.akina.qmoj.param.QmojAnswerParam;
 import team.akina.qmoj.pojo.*;
 import team.akina.qmoj.utils.http.HttpRequestHelper;
 import team.akina.qmoj.utils.http.HttpResult;
@@ -184,7 +185,7 @@ public class LeetCodeHelper {
      * @param questionId   LeetCode平台的题目id
      * @return LeetCode的题目提交流水号
      */
-    public String submitAnswerToLeetCode(QmojAnswer answer, String questionSlug, int questionId, boolean retry) {
+    public String submitAnswerToLeetCode(QmojAnswerParam answer, String questionSlug, int questionId, boolean retry) {
         // 提交题目时使用的url
         String url = String.format(Constants.LEETCODE_SUBMIT_URL, questionSlug);
 

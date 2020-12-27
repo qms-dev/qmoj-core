@@ -9,7 +9,7 @@ import team.akina.qmoj.entity.QmojQuestionWithBLOBs;
 import team.akina.qmoj.exception.DataNotFindException;
 import team.akina.qmoj.exception.InvalidInputException;
 import team.akina.qmoj.mapper.QmojQuestionMapper;
-import team.akina.qmoj.pojo.QmojAnswer;
+import team.akina.qmoj.param.QmojAnswerParam;
 import team.akina.qmoj.service.QmojAnswerService;
 import team.akina.qmoj.utils.FieldConvertUtil;
 import team.akina.qmoj.utils.LeetCodeHelper;
@@ -35,7 +35,7 @@ public class QmojAnswerServiceImpl implements QmojAnswerService {
      * @return 提交结果
      */
     @Override
-    public String submitAnswer(QmojAnswer answer) {
+    public String submitAnswer(QmojAnswerParam answer) {
         QmojQuestionWithBLOBs questionDetail = qmojQuestionMapper.selectByPrimaryKey(answer.getId());
         if (questionDetail == null) {
             throw new DataNotFindException("没有找到对应题目", answer.getId());

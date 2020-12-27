@@ -9,7 +9,7 @@ import team.akina.qmoj.constants.LanguageEnums;
 import team.akina.qmoj.entity.QmojQuestionWithBLOBs;
 import team.akina.qmoj.mapper.QmojQuestionMapper;
 import team.akina.qmoj.pojo.LeetCodeJudgementResult;
-import team.akina.qmoj.pojo.QmojAnswer;
+import team.akina.qmoj.param.QmojAnswerParam;
 import team.akina.qmoj.utils.http.HttpRequestHelper;
 import team.akina.qmoj.utils.http.HttpResult;
 
@@ -35,7 +35,7 @@ public class LeetCodeHelperTest {
     @Test
     void loginAndSummit() {
         QmojQuestionWithBLOBs question = qmojQuestionMapper.selectByPrimaryKey(1L);
-        QmojAnswer answer = new QmojAnswer();
+        QmojAnswerParam answer = new QmojAnswerParam();
         answer.setAnswer("print(\"hello, world\")");
         answer.setLanguage(LanguageEnums.PYTHON3.getCode());
 

@@ -1,9 +1,11 @@
-package team.akina.qmoj.pojo;
+package team.akina.qmoj.param;
 
 /**
  * 用来映射前端提交的题解
+ * todo 引入注解验证的方式简化Param验证过程
  */
-public class QmojAnswer {
+public class QmojAnswerParam {
+
 
     /**
      * 提交的题目的id

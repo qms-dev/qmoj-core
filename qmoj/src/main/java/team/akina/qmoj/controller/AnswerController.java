@@ -6,12 +6,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team.akina.qmoj.constants.Response;
-import team.akina.qmoj.pojo.QmojAnswer;
+import team.akina.qmoj.param.QmojAnswerParam;
 import team.akina.qmoj.service.QmojAnswerService;
 import team.akina.qmoj.service.QmojQuestionService;
 
 @RestController
-@RequestMapping("/api")
 public class AnswerController {
 
     @Autowired
@@ -27,7 +26,7 @@ public class AnswerController {
      * @return
      */
     @RequestMapping("/answers/submit")
-    public Response getQuestionContent(@RequestBody QmojAnswer answer) {
+    public Response getQuestionContent(@RequestBody QmojAnswerParam answer) {
         return Response.success(qmojAnswerService.submitAnswer(answer));
     }
 
