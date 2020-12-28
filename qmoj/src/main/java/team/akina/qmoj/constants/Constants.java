@@ -9,7 +9,7 @@ public class Constants {
     public static final String SIGN_IN_URL = "https://leetcode-cn.com/accounts/login/";
 
     // 请求时默认携带的User-Agent
-    public static final String USER_AGENT = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)";
+    public static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66";
 
     // 获取LeetCode题目内容时的查询字符串
     public static final String LEETCODE_PROBLEM_DETAIL = "{\"operationName\":\"questionData\",\"variables\":{\"titleSlug\":\"%s\"}," +
@@ -25,9 +25,24 @@ public class Constants {
     // LeetCode的graphql接口
     public static final String LEETCODE_GRAPHQL = "https://leetcode-cn.com/graphql";
 
+    // LeetCode提交题解的URL
+    public static final String LEETCODE_SUBMIT_URL = "https://leetcode-cn.com/problems/%s/submit/";
+
+    // LeetCode查询判题结果的URL
+    public static final String LEETCODE_QUERY_SUBMISSION = "https://leetcode-cn.com/submissions/detail/%s/check/";
+
     // 启动时从LeetCode获取题目的指令
     public static final String PULL_COMMAND = "PULL";
 
     //默认编程语言！
     public  static  final  String DEFAULT_PROGRAMMING_LANGUAGE = "[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]";
+
+    // 触发LeetCode访问频率限制时出现的状态码
+    public static final int STATUS_TOO_MANY_REQUESTS = 429;
+
+    // 查询LeetCode时若判题还未结束，其返回的state字段的内容
+    public static final  String LEETCODE_STATE_STARTED = "STARTED";
+
+    // 查询LeetCode时若查询的提交编号无效或该题已经无法查询，其返回的state字段的内容
+    public static final  String LEETCODE_STATE_PENDING = "PENDING";
 }

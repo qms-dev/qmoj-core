@@ -18,7 +18,7 @@ public class Response<T> implements Serializable {
      */
     public static final int SUCCESS_FLAG = 0;
     public static final int FAIL_FLAG = -1;
-
+    public static final int FAIL_PENDING = -2;
 
     private Integer status;
     private String msg;

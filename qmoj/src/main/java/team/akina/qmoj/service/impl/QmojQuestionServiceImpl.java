@@ -3,18 +3,18 @@ package team.akina.qmoj.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import javafx.beans.binding.StringBinding;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import team.akina.qmoj.constants.Constants;
-import team.akina.qmoj.entity.QmojQuestion;
 import team.akina.qmoj.entity.QmojQuestionWithBLOBs;
-import team.akina.qmoj.exception.LeetCodeCrawlerException;
 import team.akina.qmoj.mapper.QmojQuestionMapper;
 import team.akina.qmoj.pojo.QmojStatStatusPairs;
 import team.akina.qmoj.pojo.QmojTitleAndContent;
 import team.akina.qmoj.pojo.QmojTopicTag;
+import team.akina.qmoj.dto.QmojQuestionDTO;
+import team.akina.qmoj.dto.mapper.QmojQuestionDTOMapper;
+import team.akina.qmoj.entity.QmojQuestionSummary;
+import team.akina.qmoj.mapper.QmojQuestionSummaryMapper;
 import team.akina.qmoj.service.QmojQuestionService;
 import team.akina.qmoj.utils.LeetCodeHelper;
 
@@ -31,6 +31,10 @@ public class QmojQuestionServiceImpl implements QmojQuestionService {
 
     @Autowired
     private LeetCodeHelper leetCodeHelper;
+
+
+    @Autowired
+    private QmojQuestionSummaryMapper qmojQuestionSummaryMapper;
 
     /**
      * todo 这里获取到题目之后，需要添加当前数据库没有的题目
@@ -106,10 +110,31 @@ public class QmojQuestionServiceImpl implements QmojQuestionService {
                 qmojQuestionWithBLOBs.setQuestionSlug(qmojStatStatusPairs1.getQuestion__title_slug());
                 qmojQuestionWithBLOBs.setTitle(qmojTitleAndContent.getTitle());
                 qmojQuestionWithBLOBs.setContent(qmojTitleAndContent.getContent());
-                qmojQuestionWithBLOBs.setQuestionTags(JSON.toJSONString(qmojTopicTags));
+                qmojQuestionWithBLOBs.setTopicTags(JSON.toJSONString(qmojTopicTags));
                 qmojQuestionWithBLOBs.setLangToValidPlayground(Constants.DEFAULT_PROGRAMMING_LANGUAGE);
                 qmojQuestionMapper.insert(qmojQuestionWithBLOBs);
             }
         }
+    }
+
+    /**
+     * 根据题目id获取题目内容
+     *
+     * @param id 题目id
+     * @return
+     */
+    @Override
+    public QmojQuestionDTO getQuestionById(long id) {
+        return QmojQuestionDTOMapper.INSTANCE.questionToQuestionDTO(qmojQuestionMapper.selectByPrimaryKey(id));
+    }
+
+    /**
+     * 获取所有题目摘要列表
+     *
+     * @return 所有题目摘要列表
+     */
+    @Override
+    public List<QmojQuestionSummary> getQuestionSet() {
+        return qmojQuestionSummaryMapper.getAll();
     }
 }

@@ -1,6 +1,6 @@
-package team.akina.qmoj.utils;
+package team.akina.qmoj.pojo;
 
-public class Answer {
+public class LeetCodeAnswer {
     private String judge_type;
     private String lang;
     private int question_id;
@@ -46,5 +46,4 @@ public class Answer {
     public void setTyped_code(String typed_code) {
         this.typed_code = typed_code;
     }
-
 }

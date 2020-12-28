@@ -7,7 +7,7 @@ public class QmojQuestionWithBLOBs extends QmojQuestion {
 
     private String langToValidPlayground;
 
-    private String questionTags;
+    private String topicTags;
 
     public String getContent() {
         return content;
@@ -25,11 +25,11 @@ public class QmojQuestionWithBLOBs extends QmojQuestion {
         this.langToValidPlayground = langToValidPlayground == null ? null : langToValidPlayground.trim();
     }
 
-    public String getQuestionTags() {
-        return questionTags;
+    public String getTopicTags() {
+        return topicTags;
     }
 
-    public void setQuestionTags(String questionTags) {
-        this.questionTags = questionTags == null ? null : questionTags.trim();
+    public void setTopicTags(String topicTags) {
+        this.topicTags = topicTags == null ? null : topicTags.trim();
     }
 }
