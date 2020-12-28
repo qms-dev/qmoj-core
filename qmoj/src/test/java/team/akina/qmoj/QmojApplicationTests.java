@@ -39,7 +39,7 @@ class QmojApplicationTests {
     @Test
     void contextLoads() throws Exception {
         Logger logger = Logger.getLogger("test");
-        var list = leetCodeHelper.getTitleAndContentList();
+        List<QmojTitleAndContent> list = leetCodeHelper.getTitleAndContentList();
 
         for (int i = 0; i < list.size(); i++) {
             QmojTitleAndContent qmojTitleAndContent = list.get(i);

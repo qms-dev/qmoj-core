@@ -40,13 +40,20 @@ public class HttpRequestHelper {
      * @param url 请求的url
      * @return UTF-8格式的请求结果字符串，如果状态码不为200，返回null
      */
-    public HttpResult doGet(String url) throws IOException {
+    public HttpResult doGet(String url, Map<String, String> headers) throws IOException {
         // 声明 http get 请求
         HttpGet httpGet = new HttpGet(url);
         HttpResult httpResult = new HttpResult();
 
         // 装载配置信息
         httpGet.setConfig(config);
+
+        // 设置header
+        if (headers != null) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                httpGet.setHeader(entry.getKey(), entry.getValue());
+            }
+        }
 
         // 发起请求
         CloseableHttpResponse response = this.httpClient.execute(httpGet);
@@ -59,22 +66,23 @@ public class HttpRequestHelper {
     /**
      * 带参get请求
      *
-     * @param url 请求的url
-     * @param map 携带的参数
+     * @param url     请求的url
+     * @param map     携带的参数，若无则传null
+     * @param headers 指定的请求头，若不需要特别指定则传null
      * @return UTF-8格式的请求结果字符串，如果状态码不为200，返回null
      */
-    public HttpResult doGet(String url, Map<String, Object> map) throws IOException, URISyntaxException {
+    public HttpResult doGet(String url, Map<String, String> map, Map<String, String> headers) throws IOException, URISyntaxException {
         URIBuilder uriBuilder = new URIBuilder(url);
 
         if (map != null) {
             // 遍历map,拼接请求参数
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
+            for (Map.Entry<String, String> entry : map.entrySet()) {
                 uriBuilder.setParameter(entry.getKey(), entry.getValue().toString());
             }
         }
 
         // 调用不带参数的get请求
-        return this.doGet(uriBuilder.build().toString());
+        return this.doGet(uriBuilder.build().toString(), headers);
     }
 
     /**

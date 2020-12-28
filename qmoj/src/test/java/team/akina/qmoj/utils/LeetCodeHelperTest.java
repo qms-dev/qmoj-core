@@ -1,21 +1,18 @@
 package team.akina.qmoj.utils;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.CookieStore;
-import org.apache.http.cookie.Cookie;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import team.akina.qmoj.constants.Constants;
+import org.springframework.util.Assert;
+import team.akina.qmoj.constants.LanguageEnums;
+import team.akina.qmoj.entity.QmojQuestionWithBLOBs;
+import team.akina.qmoj.mapper.QmojQuestionMapper;
+import team.akina.qmoj.pojo.LeetCodeJudgementResult;
+import team.akina.qmoj.param.QmojAnswerParam;
 import team.akina.qmoj.utils.http.HttpRequestHelper;
 import team.akina.qmoj.utils.http.HttpResult;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -28,7 +25,7 @@ public class LeetCodeHelperTest {
     LeetCodeHelper leetCodeHelper;
 
     @Autowired
-    CookieStore cookieStore;
+    QmojQuestionMapper qmojQuestionMapper;
 
     @Test
     void login() {
@@ -36,51 +33,40 @@ public class LeetCodeHelperTest {
     }
 
     @Test
-    void loginAndSummit() throws IOException {
+    void loginAndSummit() {
+        QmojQuestionWithBLOBs question = qmojQuestionMapper.selectByPrimaryKey(1L);
+        QmojAnswerParam answer = new QmojAnswerParam();
+        answer.setAnswer("print(\"hello, world\")");
+        answer.setLanguage(LanguageEnums.PYTHON3.getCode());
 
-        String url = "https://leetcode-cn.com/problems/two-sum/submit/";
-        Map<String, String> headers = new HashMap<>();
+        String submissionId = leetCodeHelper.submitAnswerToLeetCode(answer, question.getQuestionSlug(), question.getQuestionId(), true);
+        Assert.hasLength(submissionId);
+    }
 
-        Answer answer = new Answer();
+    /**
+     * 查询判题结果，LeetCode对于这个check接口有调用限制，目前猜测是只能查询最近几次题目的判题结果，否则会返回pending，对我们暂无影响
+     * 因此后续如果还要使用当前的查询代码，应该要更换submissionId
+     */
+    @Test
+    void queryJudgementResult() {
+        // Accepted
+        HttpResult result = leetCodeHelper.queryJudgementResult("134005557", "two-sum");
+        LeetCodeJudgementResult leetCodeResult = JSON.parseObject(result.getBody(), LeetCodeJudgementResult.class);
+        Assert.isTrue(leetCodeResult.getStatus_code() == 10);
 
-        // 设置请求参数
-        answer.setJudge_type("large");
-        answer.setLang("cpp");
-        answer.setQuestion_id(1);
-        answer.setTest_mode(false);
-        answer.setTyped_code("print(hello,world)!");
+        // Runtime Error
+        result = leetCodeHelper.queryJudgementResult("134010774", "two-sum");
+        leetCodeResult = JSON.parseObject(result.getBody(), LeetCodeJudgementResult.class);
+        Assert.isTrue(leetCodeResult.getStatus_code() == 15);
 
-        String postContent = JSON.toJSONString(answer);
+        // Compile Error
+        result = leetCodeHelper.queryJudgementResult("134009164", "two-sum");
+        leetCodeResult = JSON.parseObject(result.getBody(), LeetCodeJudgementResult.class);
+        Assert.isTrue(leetCodeResult.getStatus_code() == 20);
 
-        if (cookieStore.getCookies().size() < 3) {
-            leetCodeHelper.loginToLeetCode();
-        }
-
-        String sessionId = "";
-        String csrftoken = "";
-
-        // 添加必要的Cookie
-        for (Cookie cookie : cookieStore.getCookies()) {
-            if (cookie.getName().equals("LEETCODE_SESSION")) {
-                sessionId = cookie.getValue();
-            }
-
-            if (cookie.getName().equals("csrftoken")) {
-                csrftoken = cookie.getValue();
-            }
-        }
-
-        headers.put("Cookie", "LEETCODE_SESSION=" + sessionId + ";csrftoken=" + csrftoken + ";");
-        headers.put("X-CSRFToken", csrftoken);
-        headers.put("X-Requested-With", "XMLHttpRequest");
-
-        headers.put("User-Agent", Constants.USER_AGENT);
-        headers.put("origin", Constants.LEETCODE_URL);
-        headers.put("Referer", "https://leetcode-cn.com/problems/two-sum");
-
-        HttpResult result = httpRequestHelper.doJsonPost(url, postContent, headers);
-
-        // 验证是否提交成功，在返回的body里会有这次的提交流水号
-        assertEquals(result.getCode(), HttpStatus.SC_OK);
+        // Time Limit Exceeded
+        result = leetCodeHelper.queryJudgementResult("134009574", "two-sum");
+        leetCodeResult = JSON.parseObject(result.getBody(), LeetCodeJudgementResult.class);
+        Assert.isTrue(leetCodeResult.getStatus_code() == 14);
     }
 }

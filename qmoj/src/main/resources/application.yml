@@ -29,7 +29,7 @@ http:
   # 并发数
   defaultMaxPerRoute: 20
   # 创建连接的最长时间
-  connectTimeout: 1000
+  connectTimeout: 1500
   # 从连接池中获取到连接的最长时间
   connectionRequestTimeout: 2000
   # 数据传输的最长时间
@@ -42,3 +42,22 @@ leetCode:
   loginName: 524472212@qq.com
   passWord: 199654088
 
+# Redis相关配置
+redis:
+  host: 127.0.0.1
+  # 端口号
+  port: 6379
+  # 连接密码（默认为空）
+  password: 123456
+  # 连接池最大连接数（使用负值表示没有限制）
+  maxActive: 8
+  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+  maxWait: -1
+  # 连接池中的最大空闲连接
+  maxIdle: 8
+  # 连接池中的最小空闲连接
+  minIdle: 0
+  # 连接超时时间（毫秒）
+  timeout: 30000
+  # 在关闭客户端连接之前等待任务处理完成的最长时间，在这之后，无论任务是否执行完成，都会被执行器关闭，默认100ms
+  shutDownTimeout: 100
