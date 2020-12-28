@@ -103,6 +103,7 @@ public class QmojQuestionServiceImpl implements QmojQuestionService {
             {
                 QmojQuestionWithBLOBs qmojQuestionWithBLOBs = new QmojQuestionWithBLOBs();
                 qmojQuestionWithBLOBs.setId(qmojStatStatusPairs1.getQuestion_id());
+                qmojQuestionWithBLOBs.setQuestionId(i++);
                 qmojQuestionWithBLOBs.setDifficulty((byte)qmojStatStatusPairs1.getLevel());
                 qmojQuestionWithBLOBs.setCreateTime(new Date());
                 qmojQuestionWithBLOBs.setModifyTime(new Date());

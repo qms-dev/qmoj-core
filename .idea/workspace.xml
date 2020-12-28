@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="6db34afa-a85a-4a6c-8278-a806dc848bd7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoj/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/config/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/constants/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/dto/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/entity/QmojQuestionWithBLOBs.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/entity/QmojQuestionWithBLOBs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/service/QmojQuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/service/QmojQuestionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/entity/QmojQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/entity/QmojQuestion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/service/impl/QmojQuestionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/service/impl/QmojQuestionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/utils/LeetCodeHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/utils/LeetCodeHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qmoj/src/test/java/team/akina/qmoj/QmojApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/qmoj/src/test/java/team/akina/qmoj/QmojApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,12 +17,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="D:\JAVA-DEV\IntelliJ IDEA 2020.2.3\plugins\maven\lib\maven3" />
-      </MavenGeneralSettings>
-    </option>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/service/QmojQuestionService.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/exception/ExceptionHelper.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/exception/CustomException.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/utils/LeetCodeHelper.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/service/impl/QmojQuestionServiceImpl.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/utils/http/HttpRequestHelper.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/controller/QuestionController.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/entity/QmojQuestionWithBLOBs.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/qmoj/src/main/java/team/akina/qmoj/controller/HelloController.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1lmBVZ7fCJhhtFSeooTN4tYvOwU" />
   <component name="ProjectViewState">
@@ -34,10 +34,117 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/qmoj" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RunManager" selected="JUnit.QmojApplicationTests.contextLoads">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QmojApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="qmoj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.akina.qmoj.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="team.akina.qmoj" />
+      <option name="MAIN_CLASS_NAME" value="team.akina.qmoj.QmojApplicationTests" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="qmoj-core" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="qmoj-core" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QmojApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="qmoj" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="team.akina.qmoj.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="team.akina.qmoj.QmojApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.QmojApplicationTests.contextLoads" />
+        <item itemvalue="Spring Boot.QmojApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -49,16 +156,25 @@
       <updated>1608192412902</updated>
       <workItem from="1608192414420" duration="46000" />
       <workItem from="1608192789557" duration="10000" />
+      <workItem from="1609166431601" duration="342000" />
+      <workItem from="1609166810514" duration="947000" />
+      <workItem from="1609167780979" duration="3331000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1608192797615">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608192797615" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

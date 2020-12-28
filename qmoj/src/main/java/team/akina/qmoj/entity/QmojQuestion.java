@@ -5,7 +5,7 @@ import java.util.Date;
 public class QmojQuestion {
     private Long id;
 
-    private Integer questionId;
+    private Integer question_Id;
 
     private String title;
 
@@ -28,11 +28,11 @@ public class QmojQuestion {
     }
 
     public Integer getQuestionId() {
-        return questionId;
+        return question_Id;
     }
 
     public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
+        this.question_Id = questionId;
     }
 
     public String getTitle() {
