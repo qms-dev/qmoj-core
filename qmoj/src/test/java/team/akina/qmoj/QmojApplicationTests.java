@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import team.akina.qmoj.pojo.QmojStatStatusPairs;
 import team.akina.qmoj.pojo.QmojTitleAndContent;
+import team.akina.qmoj.service.QmojQuestionService;
 import team.akina.qmoj.utils.LeetCodeHelper;
 
 import java.io.File;
@@ -36,15 +37,12 @@ class QmojApplicationTests {
     @Autowired
     LeetCodeHelper leetCodeHelper;
 
+    @Autowired
+    QmojQuestionService qmojQuestionService;
+
     @Test
     void contextLoads() throws Exception {
-        Logger logger = Logger.getLogger("test");
-        List<QmojTitleAndContent> list = leetCodeHelper.getTitleAndContentList();
-
-        for (int i = 0; i < list.size(); i++) {
-            QmojTitleAndContent qmojTitleAndContent = list.get(i);
-            logger.info("中文内容为:"+qmojTitleAndContent.getContent()+"中文标题为："+qmojTitleAndContent.getTitle()+"标签数组为："+qmojTitleAndContent.getTopicTags());
-        }
+        qmojQuestionService.updateQuestionsFromLeetCode();
     }
 
     @Test

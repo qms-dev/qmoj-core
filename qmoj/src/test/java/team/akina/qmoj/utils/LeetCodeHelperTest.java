@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import team.akina.qmoj.constants.Constants;
+import team.akina.qmoj.service.QmojQuestionService;
 import org.springframework.util.Assert;
 import team.akina.qmoj.constants.LanguageEnums;
 import team.akina.qmoj.entity.QmojQuestionWithBLOBs;
@@ -26,6 +28,9 @@ public class LeetCodeHelperTest {
 
     @Autowired
     QmojQuestionMapper qmojQuestionMapper;
+
+    @Autowired
+    QmojQuestionService qmojQuestionService;
 
     @Test
     void login() {
@@ -68,5 +73,11 @@ public class LeetCodeHelperTest {
         result = leetCodeHelper.queryJudgementResult("134009574", "two-sum");
         leetCodeResult = JSON.parseObject(result.getBody(), LeetCodeJudgementResult.class);
         Assert.isTrue(leetCodeResult.getStatus_code() == 14);
+    }
+
+    @Test
+    void updateQuestions()
+    {
+        qmojQuestionService.updateQuestionsFromLeetCode();
     }
 }
