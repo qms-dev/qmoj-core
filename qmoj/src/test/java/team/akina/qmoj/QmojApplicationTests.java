@@ -42,7 +42,6 @@ class QmojApplicationTests {
 
     @Test
     void contextLoads() throws Exception {
-        Logger logger = Logger.getLogger("test");
         qmojQuestionService.updateQuestionsFromLeetCode();
     }
 
