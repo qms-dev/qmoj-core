@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.akina.qmoj.mapper.QmojQuestionStatusMapper">
+  <resultMap id="BaseResultMap" type="team.akina.qmoj.entity.QmojQuestionStatus">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="total_accepted" jdbcType="INTEGER" property="totalAccepted" />
+    <result column="total_submission" jdbcType="INTEGER" property="totalSubmission" />
+    <result column="ac_rate" jdbcType="DECIMAL" property="acRate" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, question_id, total_accepted, total_submission, ac_rate, create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from qmoj_question_status
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from qmoj_question_status
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="team.akina.qmoj.entity.QmojQuestionStatus">
+    insert into qmoj_question_status (id, question_id, total_accepted, 
+      total_submission, ac_rate, create_time, 
+      modify_time)
+    values (#{id,jdbcType=BIGINT}, #{questionId,jdbcType=INTEGER}, #{totalAccepted,jdbcType=INTEGER}, 
+      #{totalSubmission,jdbcType=INTEGER}, #{acRate,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="team.akina.qmoj.entity.QmojQuestionStatus">
+    insert into qmoj_question_status
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="totalAccepted != null">
+        total_accepted,
+      </if>
+      <if test="totalSubmission != null">
+        total_submission,
+      </if>
+      <if test="acRate != null">
+        ac_rate,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="totalAccepted != null">
+        #{totalAccepted,jdbcType=INTEGER},
+      </if>
+      <if test="totalSubmission != null">
+        #{totalSubmission,jdbcType=INTEGER},
+      </if>
+      <if test="acRate != null">
+        #{acRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.akina.qmoj.entity.QmojQuestionStatus">
+    update qmoj_question_status
+    <set>
+      <if test="questionId != null">
+        question_id = #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="totalAccepted != null">
+        total_accepted = #{totalAccepted,jdbcType=INTEGER},
+      </if>
+      <if test="totalSubmission != null">
+        total_submission = #{totalSubmission,jdbcType=INTEGER},
+      </if>
+      <if test="acRate != null">
+        ac_rate = #{acRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.akina.qmoj.entity.QmojQuestionStatus">
+    update qmoj_question_status
+    set question_id = #{questionId,jdbcType=INTEGER},
+      total_accepted = #{totalAccepted,jdbcType=INTEGER},
+      total_submission = #{totalSubmission,jdbcType=INTEGER},
+      ac_rate = #{acRate,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
