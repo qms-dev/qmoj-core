@@ -10,6 +10,25 @@ spring:
     password: test123.
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  #邮件服务参数
+  mail:
+    host: smtp.163.com
+    username: a1756095583@163.com
+    password: RONROHGJBUAOPXOP
+    default-encoding: UTF-8
+    port: 465 #注：阿里云服务器不支持25端口，所以改为465端口
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+          starttls:
+            enable: true
+            required: true
+
 # mybatis的配置
 mybatis:
   configuration:

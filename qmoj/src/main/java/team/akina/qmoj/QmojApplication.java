@@ -5,12 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 import team.akina.qmoj.constants.Constants;
 import team.akina.qmoj.service.QmojQuestionService;
 import team.akina.qmoj.utils.LeetCodeHelper;
 
 @SpringBootApplication(scanBasePackages = "team.akina.qmoj")
 @MapperScan(basePackages = "team.akina.qmoj.mapper")
+@EnableAsync
 public class QmojApplication implements CommandLineRunner {
 
     public static void main(String[] args) {

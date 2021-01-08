@@ -67,6 +67,12 @@
             <ignoreColumn column="question_slug"/>
         </table>
 
+        <table tableName="qmoj_user" domainObjectName="QmojUser" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+
     </context>
 </generatorConfiguration>
 

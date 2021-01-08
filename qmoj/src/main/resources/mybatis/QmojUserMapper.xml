@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.akina.qmoj.mapper.QmojUserMapper">
+  <resultMap id="BaseResultMap" type="team.akina.qmoj.entity.QmojUser">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <id column="email" jdbcType="VARCHAR" property="email" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="is_activated" jdbcType="TINYINT" property="isActivated" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="user_code" jdbcType="CHAR" property="userCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, email, name, password, role, is_activated, info, update_time, create_time, 
+    user_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="team.akina.qmoj.entity.QmojUserKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from qmoj_user
+    where user_id = #{userId,jdbcType=BIGINT}
+    or email = #{email,jdbcType=VARCHAR} or user_code=#{userCode,jdbcType=CHAR} limit 0, 1
+  </select>
+  <select id="selectByEmail" parameterType="team.akina.qmoj.entity.QmojUserKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from qmoj_user
+    where user_id = #{userId,jdbcType=BIGINT}
+    and email = #{email,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="team.akina.qmoj.entity.QmojUserKey">
+    delete from qmoj_user
+    where user_id = #{userId,jdbcType=BIGINT}
+      and email = #{email,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="team.akina.qmoj.entity.QmojUser">
+    insert into qmoj_user (email, name,is_activated,
+      password, role, user_code,
+      info, update_time)
+    values (#{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{isActivated,jdbcType=TINYINT},
+      #{password,jdbcType=CHAR}, #{role,jdbcType=VARCHAR}, #{userCode,jdbcType=CHAR},
+      #{info,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="team.akina.qmoj.entity.QmojUser">
+    insert into qmoj_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="isActivated != null">
+        is_activated,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="userCode != null">
+        user_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="isActivated != null">
+        #{isActivated,jdbcType=TINYINT},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="team.akina.qmoj.entity.QmojUser">
+    update qmoj_user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="isActivated != null">
+        is_activated = #{isActivated,jdbcType=TINYINT},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userCode != null">
+        user_code = #{userCode,jdbcType=CHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+      and email = #{email,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.akina.qmoj.entity.QmojUser">
+    update qmoj_user
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      info = #{info,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=BIGINT}
+      and email = #{email,jdbcType=VARCHAR}
+  </update>
+</mapper>
